@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/scrap', 'MainController@scrap');
+Route::get('/latest', 'LatestMangaController@getdata');
+Route::get('detail', 'DetailController@getdata');
+
