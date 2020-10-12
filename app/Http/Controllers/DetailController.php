@@ -10,9 +10,11 @@ use Sunra\PhpSimple\HtmlDomParser;
 
 class DetailController extends Controller
 {
-    public function getdata()
+    public function getdata(Request $request)
     {
-        $results = [];
+       $url= $request->link;
+       error_log($url);
+
         $item_name_chapitres=[];
         $item_link_chapitres=[];
         $item_view_chapitres=[];
@@ -20,7 +22,7 @@ class DetailController extends Controller
 
 
 
-        $url = "https://manganelo.com/manga/xm922999";
+       // $url = "https://manganelo.com/manga/xm922999";
         $client = new  Client();
         $response = $client->request(
             'GET',
@@ -60,11 +62,15 @@ class DetailController extends Controller
                 "title"=>$item_title,
                 "img"=>$item_img,
                 "properties"=>$item_properties,
+                "author"=> $item_properties[1],
+                "status"=> $item_properties[2],
+                "genre"=> $item_properties[3],
                 "description"=>$item_description,
-                "name_chapitres"=>$item_name_chapitres,
+                "chapitres"=>$item_name_chapitres,
                 "link_chapitres"=>$item_link_chapitres,
                 "views_chapitres"=>$item_view_chapitres,
-                "time_chapitres"=>$item_time_chapitres
+                "time_chapitres"=>$item_time_chapitres,
+                "request"=>$request
             ];
 
 
